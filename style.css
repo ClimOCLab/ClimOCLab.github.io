@@ -426,8 +426,8 @@ html.js body::after{                  /* logo: one smooth, continuous zoom + dis
   content:""; position:fixed; inset:0; z-index:99999;
   background:url('main-logo/climoc-logo.png') no-repeat center center;
   background-size:515px auto; transform-origin:center;
-  animation: cclZoom 1.5s cubic-bezier(.22,.61,.36,1) forwards,
-             cclFade 1.5s linear forwards;
+  animation: cclZoom 1.9s cubic-bezier(.22,.61,.36,1) forwards,
+             cclFade 1.9s linear forwards;
   pointer-events:none;
 }
 @media (max-width:720px){
