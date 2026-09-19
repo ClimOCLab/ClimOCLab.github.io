@@ -39,6 +39,21 @@
     .pi__social img{ width:100%; height:100%; object-fit:contain; display:block; }
     .pill--cv{ background:var(--c-foam); border-color:var(--c-current); color:var(--c-ocean); font-weight:600; }
 
+    /* quick-jump sub-nav — same pattern as the Research and People pages */
+    .subnav{ position:sticky; top:var(--nav-h); z-index:40; background:rgba(247,251,252,.96);
+      backdrop-filter:saturate(160%) blur(10px); -webkit-backdrop-filter:saturate(160%) blur(10px);
+      border-bottom:1px solid var(--c-line); box-shadow:0 8px 20px -18px rgba(8,34,48,.3); }
+    .subnav__inner{ max-width:var(--maxw); margin-inline:auto; padding:1.1rem var(--gutter);
+      display:flex; align-items:center; gap:.9rem; flex-wrap:wrap; }
+    .subnav__link{ display:inline-flex; align-items:center; gap:.45rem;
+      font-family:var(--font-display); font-weight:600; font-size:.98rem; letter-spacing:-.005em; color:var(--c-ocean);
+      background:#fff; border:1.5px solid var(--c-line); border-radius:999px; padding:.62rem 1.35rem;
+      text-decoration:none; transition:border-color .2s ease, color .2s ease, box-shadow .2s ease, background .2s ease; }
+    .subnav__link svg{ width:16px; height:16px; flex:0 0 auto; }
+    .subnav__link:hover{ border-color:var(--c-current); color:var(--c-current); box-shadow:0 8px 18px -12px rgba(26,134,160,.35); }
+    .subnav__link.is-active{ background:var(--c-ocean); border-color:var(--c-ocean); color:#fff; }
+    #outreach, #join{ scroll-margin-top:calc(var(--nav-h) + 72px); }
+
     /* Global reach — sits above the Join Us band */
     .reach{ padding:40px 0 24px; text-align:center; }
     .reach__label{ font-family:var(--f-mono); font-size:.78rem; letter-spacing:.06em;
@@ -89,8 +104,22 @@
 
   <main id="main">
 
+    <!-- ============ QUICK JUMP ============ -->
+    <nav class="subnav" aria-label="Jump to section">
+      <div class="subnav__inner">
+        <a class="subnav__link" href="#outreach">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"/></svg>
+          Outreach
+        </a>
+        <a class="subnav__link" href="#join">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8 7.5V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.5M3 12.5h18"/></svg>
+          Work with us
+        </a>
+      </div>
+    </nav>
+
     <!-- ============ GLOBAL REACH ============ -->
-    <section class="reach reveal">
+    <section class="reach reveal" id="outreach">
       <div class="container">
         <h2 class="reach__title">Our outreach, globally</h2>
         <div class="reach__map" id="reachMap" role="img" aria-label="Map of India showing its official boundary"></div>
@@ -257,6 +286,28 @@
           }
         });
       });
+    })();
+  </script>
+  <script>
+    /* Highlight whichever sub-nav link matches the section currently in view */
+    (function () {
+      var links = [].slice.call(document.querySelectorAll('.subnav__link'));
+      var sections = ['outreach', 'join'].map(function (id) { return document.getElementById(id); });
+      if (!links.length || !('IntersectionObserver' in window)) return;
+
+      var linkFor = {};
+      links.forEach(function (a) { linkFor[a.getAttribute('href').slice(1)] = a; });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          links.forEach(function (a) { a.classList.remove('is-active'); });
+          var link = linkFor[entry.target.id];
+          if (link) link.classList.add('is-active');
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+      sections.forEach(function (s) { if (s) observer.observe(s); });
     })();
   </script>
 </body>
