@@ -358,5 +358,13 @@
       sections.forEach(function (s) { if (s) observer.observe(s); });
     })();
   </script>
+  <script>
+    // Site-wide visitor-by-country ping (feeds the outreach map on the Join Us page).
+    (function(){
+      try {
+        fetch('https://climoc-visits.binny2020srb.workers.dev/hit').catch(function(){});
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
