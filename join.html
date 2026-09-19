@@ -219,11 +219,18 @@
         var maxCount = 0;
         Object.keys(counts).forEach(function(k){ if (counts[k] > maxCount) maxCount = counts[k]; });
 
-        // Base layer: every country outlined, shaded by its visitor count.
-        fetch('world_countries.geojson')
-          .then(function(r){ return r.json(); })
-          .then(function(geo){
-            var others = geo.features.filter(function(f){ return f.properties.iso2 !== 'IN'; });
+        var worldFetch = fetch('world_countries.geojson').then(function(r){ return r.json(); }).catch(function(){ return null; });
+        var indiaFetch = fetch('india_boundary.geojson').then(function(r){ return r.json(); }).catch(function(){ return null; });
+
+        // Wait for BOTH to load, then add them in a fixed order (world first,
+        // India second) so India is always drawn on top — regardless of
+        // which request happens to finish first over the network.
+        Promise.all([worldFetch, indiaFetch]).then(function(results){
+          var worldGeo = results[0];
+          var indiaGeo = results[1];
+
+          if (worldGeo) {
+            var others = worldGeo.features.filter(function(f){ return f.properties.iso2 !== 'IN'; });
             L.geoJSON({ type: 'FeatureCollection', features: others }, {
               style: function(f){
                 var c = counts[f.properties.iso2] || 0;
@@ -236,21 +243,19 @@
               return props.name + ': ' + c + (c === 1 ? ' visit' : ' visits');
             })
             .addTo(map);
-          })
-          .catch(function(){ /* base layer is decorative; map still works without it */ });
+          }
 
-        // India, drawn from the officially-correct boundary, shaded the same way.
-        fetch('india_boundary.geojson')
-          .then(function(r){ return r.json(); })
-          .then(function(geo){
+          if (indiaGeo) {
             var c = counts['IN'] || 0;
-            L.geoJSON(geo, {
+            var indiaLayer = L.geoJSON(indiaGeo, {
               style: { color: '#0b5f73', weight: 1.5, fillColor: colorForCount(c, maxCount), fillOpacity: 0.85 }
             })
             .bindTooltip('India: ' + c + (c === 1 ? ' visit' : ' visits'))
             .addTo(map);
-          })
-          .catch(function(){ /* India overlay failed to load; world view is unaffected */ });
+            // Belt-and-braces: force India above everything else no matter what.
+            indiaLayer.bringToFront();
+          }
+        });
       });
     })();
   </script>
