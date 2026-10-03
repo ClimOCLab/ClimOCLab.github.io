@@ -13,7 +13,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Research &amp; Projects — ClimOC-Lab</title>
-  <meta name="description" content="The ClimOC-Lab at the Centre for Atmospheric Sciences, IIT Delhi studies ocean warming, sea-level rise, marine heatwaves, and cryosphere change, and lists our externally funded projects with ANRF, ISRO, and KAUST." />
+  <meta name="description" content="The ClimOC-Lab at the Centre for Atmospheric Sciences, IIT Delhi studies ocean warming, sea-level rise, marine heatwaves, and cryosphere change, and lists our externally funded projects with ANRF, ISRO, the IITD–Exeter GRP, and KAUST." />
 
   <!-- Social preview -->
   <meta property="og:title" content="ClimOC-Lab — Research &amp; Projects" />
@@ -81,6 +81,7 @@
       box-shadow:0 6px 16px -10px rgba(8,34,48,.55); min-width:66px; overflow:hidden; white-space:nowrap; }
     .gantt__bar--anrf{ background:linear-gradient(135deg,#1A86A0,#0A3A5A); }
     .gantt__bar--isro{ background:linear-gradient(135deg,#6D74E0,#3E3F9E); }
+    .gantt__bar--grp{ background:linear-gradient(135deg,#3E9B5C,#1F5C38); }
     .gantt__bar--kaust{ background:linear-gradient(135deg,#D6A24C,#8B5E1F); }
     .gantt__today{ position:absolute; top:-6px; bottom:-2px; width:0; border-left:2px dashed var(--c-anomaly-d); z-index:3; }
     .gantt__today::after{ content:'TODAY'; position:absolute; top:-16px; left:0; transform:translateX(-50%);
@@ -116,6 +117,7 @@
     .pcard::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:5px; }
     .pcard--anrf::before{ background:linear-gradient(180deg,#1A86A0,#0A3A5A); }
     .pcard--isro::before{ background:linear-gradient(180deg,#6D74E0,#3E3F9E); }
+    .pcard--grp::before{ background:linear-gradient(180deg,#3E9B5C,#1F5C38); }
     .pcard--kaust::before{ background:linear-gradient(180deg,#D6A24C,#8B5E1F); }
     .pcard__top{ display:flex; align-items:flex-start; gap:.75rem; flex-wrap:wrap; margin-bottom:.85rem; }
     .pcard__title{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.2rem,2.6vw,1.5rem); color:var(--c-ink); margin:0 auto 0 0; letter-spacing:-.01em; line-height:1.25; }
@@ -252,12 +254,12 @@
 
         <!-- funding summary -->
         <div class="pstats reveal">
-          <div class="pstat"><div class="pstat__num">3</div><div class="pstat__label">Total projects</div></div>
-          <div class="pstat"><div class="pstat__num">₹84.8 L</div><div class="pstat__label">Total funding</div></div>
-          <div class="pstat"><div class="pstat__num">3</div><div class="pstat__label">Funding agencies</div></div>
+          <div class="pstat"><div class="pstat__num">4</div><div class="pstat__label">Total projects</div></div>
+          <div class="pstat"><div class="pstat__num">₹89.8 L</div><div class="pstat__label">Total funding</div></div>
+          <div class="pstat"><div class="pstat__num">4</div><div class="pstat__label">Funding agencies</div></div>
           <div class="pstat"><div class="pstat__num">2025–28</div><div class="pstat__label">Active period</div></div>
         </div>
-        <p class="pstats-note reveal">Total funding combines ₹77.2 L from ANRF and ISRO with an approximate INR equivalent of the KAUST grant (US&nbsp;$8,000 at ≈₹95.3/US$, July 2026 mid-market rate).</p>
+        <p class="pstats-note reveal">Total funding combines ₹82.2 L from ANRF, ISRO and the IITD–Exeter GRP with an approximate INR equivalent of the KAUST grant (US&nbsp;$8,000 at ≈₹95.3/US$, July 2026 mid-market rate).</p>
 
         <!-- timeline -->
         <p class="gantt-label reveal">Project timeline · 2025 – 2028</p>
@@ -275,6 +277,9 @@
                 <div class="gantt__bar gantt__bar--isro" style="left:40.5%;width:57.1%"><span>Sea Ice</span></div>
               </div>
               <div class="gantt__row">
+                <div class="gantt__bar gantt__bar--grp" style="left:50.0%;width:28.6%"><span>Ice–Ocean</span></div>
+              </div>
+              <div class="gantt__row">
                 <div class="gantt__bar gantt__bar--kaust" style="left:35.7%;width:4.8%"><span>Dust</span></div>
               </div>
               <div class="gantt__today" style="left:42.9%"></div>
@@ -290,6 +295,7 @@
         <div class="gantt-legend reveal">
           <span><i style="background:linear-gradient(135deg,#1A86A0,#0A3A5A)"></i> ANRF</span>
           <span><i style="background:linear-gradient(135deg,#6D74E0,#3E3F9E)"></i> ISRO</span>
+          <span><i style="background:linear-gradient(135deg,#3E9B5C,#1F5C38)"></i> IITD–Exeter GRP</span>
           <span><i style="background:linear-gradient(135deg,#D6A24C,#8B5E1F)"></i> KAUST</span>
           <span><i class="today"></i> Today (<span id="todayLabel">Jul 2026</span>)</span>
         </div>
@@ -379,6 +385,47 @@
                 <span class="pchip">Cryosphere</span>
                 <span class="pchip">Sea-ice variability</span>
                 <span class="pchip">Climate change</span>
+              </div>
+            </article>
+          </div>
+
+          <!-- ===== IITD-EXETER GRP ===== -->
+          <div class="agency reveal">
+            <div class="agency-head">
+              <span class="agency-dot" style="background:linear-gradient(135deg,#3E9B5C,#1F5C38)"></span>
+              <span class="agency-name">IITD–Exeter GRP</span>
+              <span class="agency-full">Global Partner Research Fund, IIT Delhi &amp; University of Exeter</span>
+              <span class="agency-count">1 project · ₹5.0 L</span>
+            </div>
+
+            <article class="pcard pcard--grp">
+              <div class="pcard__top">
+                <h3 class="pcard__title">IITD–Exeter GRP Funding on Ice-Ocean-Atmosphere Interactions</h3>
+                <span class="tstatus tstatus--live"><span class="dot"></span>Ongoing</span>
+              </div>
+              <div class="pcard__meta">
+                <span class="pcard__metaitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6"/></svg>
+                  IITD&nbsp;PI&nbsp;<b>Prof. Saurabh Rathore</b>
+                </span>
+                <span class="pcard__metaitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+                  Duration&nbsp;<b>October 2026 – September 2027</b>
+                </span>
+                <span class="pcard__metaitem pcard__metaitem--cost">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/><path d="M6 12h.01M18 12h.01"/></svg>
+                  Cost&nbsp;<b>₹5,00,000</b>
+                </span>
+                <span class="pcard__metaitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 21v-4h4v4M9 10h.01M15 10h.01M9 13.5h.01M15 13.5h.01"/></svg>
+                  IITD–Exeter GRP
+                </span>
+              </div>
+              <div class="pchips">
+                <span class="pchip">Ice–ocean interactions</span>
+                <span class="pchip">Atmosphere coupling</span>
+                <span class="pchip">Climate model evaluation</span>
+                <span class="pchip">International collaboration</span>
               </div>
             </article>
           </div>
