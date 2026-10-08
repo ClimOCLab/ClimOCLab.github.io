@@ -13,7 +13,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teaching — ClimOC-Lab</title>
-  <meta name="description" content="Courses taught by Prof. Saurabh Rathore at the Centre for Atmospheric Sciences (CAS), IIT Delhi, including the Science of Climate Change and Air–Sea Interaction." />
+  <meta name="description" content="Courses taught by Prof. Saurabh Rathore at the Centre for Atmospheric Sciences (CAS), IIT Delhi, including the Science of Climate Change, Air–Sea Interaction, and Introduction to Oceanography." />
 
   <!-- Social preview -->
   <meta property="og:title" content="ClimOC-Lab — Teaching" />
@@ -49,6 +49,7 @@
     .gantt__bar--done{ background:linear-gradient(135deg,var(--c-current),var(--c-deep)); }
     .gantt__bar--live{ background:linear-gradient(90deg,#1FA98F,#2FBFA0 68%,rgba(47,191,160,.4)); padding-right:1.7rem; }
     .gantt__bar--live::after{ content:'▸▸'; position:absolute; right:.55rem; opacity:.9; letter-spacing:-3px; }
+    .gantt__bar--upcoming{ background:linear-gradient(135deg,#D6A24C,#8B5E1F); }
     .gantt__axis{ position:relative; min-width:440px; height:24px; border-top:1px solid var(--c-line); margin-top:.15rem; }
     .gantt__axis span{ position:absolute; top:5px; transform:translateX(-50%); font-family:var(--font-mono); font-size:.72rem; color:var(--c-slate); }
     .gantt__axis span:first-child{ transform:translateX(0); }
@@ -62,15 +63,18 @@
     .tcard::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:5px; }
     .tcard--done::before{ background:linear-gradient(180deg,var(--c-current),var(--c-deep)); }
     .tcard--live::before{ background:linear-gradient(180deg,#2FBFA0,#1FA98F); }
+    .tcard--upcoming::before{ background:linear-gradient(180deg,#D6A24C,#8B5E1F); }
     .tcard__top{ display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; margin-bottom:.75rem; }
     .tcard__code{ font-family:var(--font-mono); font-weight:700; font-size:.9rem; color:#fff; padding:.32rem .62rem; border-radius:8px; letter-spacing:.02em; flex:0 0 auto; }
     .tcard--done .tcard__code{ background:var(--c-ocean); }
     .tcard--live .tcard__code{ background:#1FA98F; }
+    .tcard--upcoming .tcard__code{ background:#C68A1E; }
     .tcard__title{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.2rem,2.6vw,1.55rem); color:var(--c-ink); margin:0 auto 0 0; letter-spacing:-.01em; }
     .tstatus{ display:inline-flex; align-items:center; gap:.42rem; font-family:var(--font-mono); font-size:.67rem; font-weight:700;
       letter-spacing:.05em; text-transform:uppercase; padding:.34rem .64rem; border-radius:999px; white-space:nowrap; flex:0 0 auto; }
     .tstatus--done{ background:#EEF3F5; color:var(--c-slate); }
     .tstatus--live{ background:#D8F0DD; color:#2F8F5C; }
+    .tstatus--upcoming{ background:#FBF3E1; color:#8B5E1F; }
     .tstatus .dot{ width:7px; height:7px; border-radius:50%; background:#2FA98A; box-shadow:0 0 0 0 rgba(47,169,138,.55); animation:tpulse 1.9s ease-out infinite; }
     @keyframes tpulse{ 0%{ box-shadow:0 0 0 0 rgba(47,169,138,.5); } 70%{ box-shadow:0 0 0 8px rgba(47,169,138,0); } 100%{ box-shadow:0 0 0 0 rgba(47,169,138,0); } }
     .tcard__meta{ display:flex; flex-wrap:wrap; gap:.5rem 1.4rem; margin:0 0 1rem; }
@@ -181,21 +185,26 @@
           <div class="gantt" aria-hidden="true">
             <div class="gantt__plot">
               <span class="gantt__grid" style="left:0%"></span>
-              <span class="gantt__grid" style="left:33.33%"></span>
-              <span class="gantt__grid" style="left:66.67%"></span>
+              <span class="gantt__grid" style="left:25%"></span>
+              <span class="gantt__grid" style="left:50%"></span>
+              <span class="gantt__grid" style="left:75%"></span>
               <span class="gantt__grid" style="left:100%"></span>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--done" style="left:0%;width:77.8%"><span>ASL736</span></div>
+                <div class="gantt__bar gantt__bar--done" style="left:0%;width:58.2%"><span>ASL736</span></div>
               </div>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--live" style="left:83.3%;right:0"><span>ASL762</span></div>
+                <div class="gantt__bar gantt__bar--live" style="left:62.4%;right:0"><span>ASL762</span></div>
+              </div>
+              <div class="gantt__row">
+                <div class="gantt__bar gantt__bar--upcoming" style="left:75%;width:10.3%"><span>ASL350</span></div>
               </div>
             </div>
             <div class="gantt__axis">
               <span style="left:0%">2024</span>
-              <span style="left:33.33%">2025</span>
-              <span style="left:66.67%">2026</span>
-              <span style="left:100%">2027</span>
+              <span style="left:25%">2025</span>
+              <span style="left:50%">2026</span>
+              <span style="left:75%">2027</span>
+              <span style="left:100%">2028</span>
             </div>
           </div>
         </div>
@@ -285,14 +294,42 @@
         <!-- ============ NEXT SEMESTER ============ -->
         <div class="course-group reveal" id="next-semester">
           <h3 class="course-group__title">Next Semester</h3>
-          <p class="course-empty">No course is scheduled for next semester yet — check back closer to registration.</p>
-          <!--
-          WHEN A COURSE IS CONFIRMED: replace the <p class="course-empty"> line above with a
-          <article class="tcard tcard--live reveal"> block, copying the structure of the Ongoing
-          course above (code, title, a tstatus badge, meta row, description, chips). Give it
-          data/tstatus matching "Ongoing" once the semester starts, or add a new tstatus variant
-          if you want a distinct "Upcoming" badge color later.
-          -->
+
+          <!-- ASL350/3500 -->
+          <article class="tcard tcard--upcoming reveal">
+            <div class="tcard__top">
+              <span class="tcard__code">ASL350/3500</span>
+              <h3 class="tcard__title">Introduction to Oceanography</h3>
+              <span class="tstatus tstatus--upcoming">Upcoming</span>
+            </div>
+            <div class="tcard__meta">
+              <span class="tcard__metaitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+                Offered&nbsp;<b>Jan 2027 – May 2027</b>
+              </span>
+              <span class="tcard__metaitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 9h16M4 15h16M9 4v16M15 4v16"/></svg>
+                Credits&nbsp;<b>3–0–0</b>
+              </span>
+              <span class="tcard__metaitem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+                CAS, IIT Delhi
+              </span>
+            </div>
+            <p class="tcard__desc">The course begins with a description of structure, formation, and evolution of ocean basins which extends to important features of each ocean basin. The physical, chemical, and biological properties of seawater and their distribution are covered next. Optical and acoustic properties of the sea and their applications are covered; relations of ocean currents and waves with the driving forces, effect of ocean basins on oceanic motions; properties of wind waves, internal waves, tsunamis, and tides; mechanisms of transport of energy, momentum, and physical substances within and across ocean basins; coastal ocean processes and transport of sediments; biological productivity of oceans and marine organisms, marine pollution and oil spill; topics of current interest such as ocean's role in climate, global warming, sea-level rise, storm surge and tsunami warning, fisheries, and renewable energy from oceans are presented.</p>
+            <div class="tchips">
+              <span class="tchip">Ocean basins</span>
+              <span class="tchip">Seawater properties</span>
+              <span class="tchip">Ocean currents</span>
+              <span class="tchip">Wind &amp; internal waves</span>
+              <span class="tchip">Tsunamis &amp; tides</span>
+              <span class="tchip">Coastal processes</span>
+              <span class="tchip">Marine productivity</span>
+              <span class="tchip">Marine pollution</span>
+              <span class="tchip">Sea-level rise</span>
+              <span class="tchip">Renewable ocean energy</span>
+            </div>
+          </article>
         </div>
 
       </div>
