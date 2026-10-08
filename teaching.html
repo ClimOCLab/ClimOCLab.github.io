@@ -49,6 +49,9 @@
     .gantt__bar--done{ background:linear-gradient(135deg,var(--c-current),var(--c-deep)); }
     .gantt__bar--live{ background:linear-gradient(90deg,#1FA98F,#2FBFA0 68%,rgba(47,191,160,.4)); padding-right:1.7rem; }
     .gantt__bar--live::after{ content:'▸▸'; position:absolute; right:.55rem; opacity:.9; letter-spacing:-3px; }
+    /* Same "ongoing" green as --live, but for a course with a known end date
+       rather than an open-ended one -- a plain bar with no trailing arrow. */
+    .gantt__bar--live-fixed{ background:linear-gradient(135deg,#2FBFA0,#1FA98F); }
     .gantt__bar--upcoming{ background:linear-gradient(135deg,#D6A24C,#8B5E1F); }
     .gantt__axis{ position:relative; min-width:440px; height:24px; border-top:1px solid var(--c-line); margin-top:.15rem; }
     .gantt__axis span{ position:absolute; top:5px; transform:translateX(-50%); font-family:var(--font-mono); font-size:.72rem; color:var(--c-slate); }
@@ -193,7 +196,7 @@
                 <div class="gantt__bar gantt__bar--done" style="left:0%;width:58.2%"><span>ASL736</span></div>
               </div>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--live" style="left:62.4%;right:0"><span>ASL762</span></div>
+                <div class="gantt__bar gantt__bar--live-fixed" style="left:62.4%;width:10.5%"><span>ASL762</span></div>
               </div>
               <div class="gantt__row">
                 <div class="gantt__bar gantt__bar--upcoming" style="left:75%;width:10.3%"><span>ASL350</span></div>
@@ -264,7 +267,7 @@
             <div class="tcard__meta">
               <span class="tcard__metaitem">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
-                Offered&nbsp;<b>July 2026 – Ongoing</b>
+                Offered&nbsp;<b>July 2026 – November 2026</b>
               </span>
               <span class="tcard__metaitem">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 9h16M4 15h16M9 4v16M15 4v16"/></svg>
