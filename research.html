@@ -73,22 +73,40 @@
     .gantt-label{ font-family:var(--font-mono); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; color:var(--c-slate); margin:0 0 .7rem; }
     .gantt-wrap{ position:relative; margin:0 0 .9rem; }
     .gantt{ background:linear-gradient(180deg,#fff,var(--c-mist)); border:1px solid var(--c-line); border-radius:16px; padding:1.7rem 1.3rem .5rem; margin:0; overflow-x:auto; }
-    .gantt__plot{ position:relative; min-width:460px; }
+    .gantt__plot{ position:relative; min-width:460px; container:gplot / inline-size; }
     .gantt__grid{ position:absolute; top:0; bottom:0; width:0; border-left:1px dashed var(--c-line); z-index:0; }
-    .gantt__row{ position:relative; height:42px; margin-bottom:.55rem; z-index:1; }
-    .gantt__bar{ position:absolute; top:2px; height:38px; border-radius:10px; display:flex; align-items:center; padding:0 .85rem;
-      color:#fff; font-family:var(--font-mono); font-weight:700; font-size:.8rem; letter-spacing:.02em;
-      box-shadow:0 6px 16px -10px rgba(8,34,48,.55); min-width:66px; overflow:hidden; white-space:nowrap; }
+    .gantt__grid--q{ border-left:1px solid rgba(219,232,236,.55); }
+    .gantt__row{ position:relative; height:50px; margin-bottom:.5rem; z-index:1; }
+    .gantt__bar{ position:absolute; top:2px; height:46px; border-radius:11px; display:flex; align-items:center; gap:.5rem; padding:0 .8rem;
+      color:#fff; text-align:left; font:inherit; border:0; cursor:pointer; -webkit-appearance:none; appearance:none;
+      box-shadow:0 6px 16px -10px rgba(8,34,48,.55); min-width:66px; overflow:hidden; white-space:nowrap;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease; }
+    .gantt__bar:hover, .gantt__bar.is-open{ transform:translateY(-1px); box-shadow:0 10px 22px -10px rgba(8,34,48,.65); filter:saturate(1.08); }
+    .gantt__bar:focus-visible{ outline:3px solid var(--c-anomaly); outline-offset:2px; }
     .gantt__bar--anrf{ background:linear-gradient(135deg,#1A86A0,#0A3A5A); }
     .gantt__bar--isro{ background:linear-gradient(135deg,#6D74E0,#3E3F9E); }
     .gantt__bar--grp{ background:linear-gradient(135deg,#3E9B5C,#1F5C38); }
     .gantt__bar--kaust{ background:linear-gradient(135deg,#D6A24C,#8B5E1F); }
-    .gantt__today{ position:absolute; top:-6px; bottom:-2px; width:0; border-left:2px dashed var(--c-anomaly-d); z-index:3; }
+    .gantt__bar--grp{ padding-left:1.15rem; }
+    .gantt__txt{ position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; min-width:0; line-height:1.15; text-shadow:0 1px 2px rgba(6,24,36,.35); }
+    .gantt__name{ font-family:var(--font-mono); font-weight:700; font-size:.8rem; letter-spacing:.02em; }
+    .gantt__dates{ font-family:var(--font-mono); font-weight:500; font-size:.64rem; letter-spacing:.02em; opacity:.92; margin-top:2px; }
+    .gantt__chip{ position:relative; z-index:2; margin-left:auto; font-family:var(--font-mono); font-weight:700; font-size:.62rem; letter-spacing:.04em;
+      background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.4); border-radius:999px; padding:2px 7px; text-shadow:none; }
+    .gantt__bar--kaust .gantt__dates{ display:none; }
+    .gantt__ext{ position:absolute; top:2px; height:46px; display:flex; align-items:center; gap:.45rem; padding-left:.55rem; font-family:var(--font-mono);
+      font-size:.64rem; color:var(--c-slate); white-space:nowrap; pointer-events:none; }
+    .gantt__ext b{ font-weight:700; color:var(--c-ocean); background:var(--c-foam); border:1px solid var(--c-line); border-radius:999px; padding:2px 7px; font-size:.62rem; }
+    .gantt__today{ position:absolute; top:-6px; bottom:-2px; width:0; border-left:2px dashed var(--c-anomaly-d); z-index:3; pointer-events:none; }
     .gantt__today::after{ content:'TODAY'; position:absolute; top:-16px; left:0; transform:translateX(-50%);
       font-family:var(--font-mono); font-size:.6rem; font-weight:700; letter-spacing:.06em; color:#fff; background:var(--c-anomaly-d); padding:1px 5px; border-radius:4px; white-space:nowrap; }
+    @container gplot (max-width:820px){ .gantt__chip{ display:none; } }
+    @container gplot (max-width:640px){ .gantt__dates{ display:none; } .gantt__ext{ display:none; } }
     .gantt__axis{ position:relative; min-width:460px; height:24px; border-top:1px solid var(--c-line); margin-top:.15rem; }
     .gantt__axis span{ position:absolute; top:5px; transform:translateX(-50%); font-family:var(--font-mono); font-size:.72rem; color:var(--c-slate); }
     .gantt__axis span:first-child{ transform:translateX(0); }
+    .gantt__axis i{ position:absolute; top:0; width:0; height:5px; border-left:1px solid var(--c-line); }
+    .gantt__axis i.yr{ height:9px; border-left-color:#b9cfd6; }
     .gantt-legend{ display:flex; flex-wrap:wrap; gap:.5rem 1.3rem; margin:0 0 3rem; font-family:var(--font-mono); font-size:.73rem; color:var(--c-slate); }
     .gantt-legend span{ display:inline-flex; align-items:center; gap:.45rem; }
     .gantt-legend i{ width:13px; height:13px; border-radius:4px; display:inline-block; flex:0 0 auto; }
@@ -135,6 +153,23 @@
     .pchips{ display:flex; flex-wrap:wrap; gap:.5rem; }
     .pchip{ font-family:var(--font-body); font-size:.77rem; color:var(--c-ocean); background:var(--c-foam); border:1px solid var(--c-line);
       border-radius:999px; padding:.34rem .74rem; }
+
+    /* details card (hover / tap / keyboard) */
+    .gantt-tip{ position:absolute; z-index:20; width:min(300px, calc(100% - 16px)); background:#fff; border:1px solid var(--c-line); border-radius:14px;
+      box-shadow:0 18px 40px -16px rgba(8,34,48,.45); padding:.95rem 1rem .9rem; opacity:0; visibility:hidden; transform:translateY(4px);
+      transition:opacity .16s ease, transform .16s ease, visibility 0s linear .16s; pointer-events:none; }
+    .gantt-tip.is-on{ opacity:1; visibility:visible; transform:none; transition-delay:0s; pointer-events:auto; }
+    .gantt-tip__bar{ height:4px; border-radius:4px; margin:-.2rem 0 .7rem; }
+    .gantt-tip__agency{ font-family:var(--font-display); font-weight:700; font-size:1rem; color:var(--c-ink); margin:0 0 .7rem; }
+    .gantt-tip dl{ display:grid; grid-template-columns:auto 1fr; gap:.3rem .8rem; margin:0; font-size:.82rem; }
+    .gantt-tip dt{ font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--c-slate); padding-top:.12rem; }
+    .gantt-tip dd{ margin:0; color:var(--c-ink); font-weight:600; }
+    .gantt-tip__meter{ height:6px; border-radius:6px; background:var(--c-foam); margin:.75rem 0 .2rem; overflow:hidden; }
+    .gantt-tip__meter span{ display:block; height:100%; border-radius:6px; }
+    .gantt-tip__pct{ font-family:var(--font-mono); font-size:.66rem; color:var(--c-slate); }
+    .pcard{ scroll-margin-top:calc(var(--nav-h) + 90px); }
+    .gantt-hint{ font-family:var(--font-mono); font-size:.68rem; color:var(--c-slate); margin:-.2rem 0 .8rem; }
+    @media (prefers-reduced-motion: reduce){ .gantt__bar, .gantt-tip{ transition:none; } }
 
     @media (prefers-reduced-motion: reduce){ .tstatus .dot{ animation:none; } }
     @media (max-width:600px){
@@ -263,24 +298,37 @@
 
         <!-- timeline -->
         <p class="gantt-label reveal">Project timeline · 2025 – 2028</p>
-        <div class="gantt-wrap reveal">
-          <div class="gantt" aria-hidden="true">
+        <p class="gantt-hint reveal">Hover or tap a bar for dates, funding and status.</p>
+        <div class="gantt-wrap reveal" id="ganttWrap">
+          <div class="gantt">
             <div class="gantt__plot">
-              <span class="gantt__grid" style="left:0%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:7.1%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:14.3%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:21.4%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:35.7%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:42.9%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:50.0%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:64.3%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:71.4%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:78.6%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:92.9%"></span>
+              <span class="gantt__grid gantt__grid--q" style="left:100.0%"></span>
+              <span class="gantt__grid" style="left:0.0%"></span>
               <span class="gantt__grid" style="left:28.6%"></span>
               <span class="gantt__grid" style="left:57.1%"></span>
               <span class="gantt__grid" style="left:85.7%"></span>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--anrf" style="left:11.9%;width:85.7%"><span>Marine Heatwaves</span></div>
+                <button type="button" class="gantt__bar gantt__bar--anrf" style="left:11.9%;width:85.7%" data-agency="ANRF" data-start="June 2025" data-end="June 2028" data-fund="₹57,68,904" data-status="Ongoing" data-role="Principal Investigator" data-color="linear-gradient(90deg,#1A86A0,#0A3A5A)" aria-label="Marine Heatwaves, June 2025 to June 2028. Select for details."><span class="gantt__txt"><span class="gantt__name">Marine Heatwaves</span><span class="gantt__dates">Jun 2025 → Jun 2028</span></span><span class="gantt__chip">36 mo</span></button>
               </div>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--isro" style="left:40.5%;width:57.1%"><span>Sea Ice</span></div>
+                <button type="button" class="gantt__bar gantt__bar--isro" style="left:40.5%;width:57.1%" data-agency="ISRO" data-start="June 2026" data-end="June 2028" data-fund="₹19,50,965" data-status="Ongoing" data-role="Principal Investigator" data-color="linear-gradient(90deg,#6D74E0,#3E3F9E)" aria-label="Sea Ice, June 2026 to June 2028. Select for details."><span class="gantt__txt"><span class="gantt__name">Sea Ice</span><span class="gantt__dates">Jun 2026 → Jun 2028</span></span><span class="gantt__chip">24 mo</span></button>
               </div>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--grp" style="left:50.0%;width:28.6%"><span>Ice–Ocean</span></div>
+                <button type="button" class="gantt__bar gantt__bar--grp" style="left:50.0%;width:28.6%" data-agency="IITD–Exeter GRP" data-start="October 2026" data-end="September 2027" data-fund="₹5,00,000" data-status="Ongoing" data-role="Principal Investigator" data-color="linear-gradient(90deg,#3E9B5C,#1F5C38)" aria-label="Ice–Ocean, October 2026 to September 2027. Select for details."><span class="gantt__txt"><span class="gantt__name">Ice–Ocean</span><span class="gantt__dates">Oct 2026 → Sep 2027</span></span><span class="gantt__chip">12 mo</span></button>
               </div>
               <div class="gantt__row">
-                <div class="gantt__bar gantt__bar--kaust" style="left:35.7%;width:4.8%"><span>Dust</span></div>
+                <button type="button" class="gantt__bar gantt__bar--kaust" style="left:35.7%;width:4.8%" data-agency="KAUST" data-start="April 2026" data-end="June 2026" data-fund="$8,000 (≈₹7.6 L)" data-status="Completed" data-role="Co-Principal Investigator" data-color="linear-gradient(90deg,#D6A24C,#8B5E1F)" aria-label="Dust, April 2026 to June 2026. Select for details."><span class="gantt__txt"><span class="gantt__name">Dust</span><span class="gantt__dates">Apr → Jun 2026</span></span></button>
+                <span class="gantt__ext" style="left:calc(35.7% + max(4.8%, 66px))">Apr → Jun 2026<b>3 mo</b></span>
               </div>
               <div class="gantt__today" style="left:42.9%"></div>
             </div>
@@ -289,8 +337,24 @@
               <span style="left:28.6%">2026</span>
               <span style="left:57.1%">2027</span>
               <span style="left:85.7%">2028</span>
+              <i class="yr" style="left:0.0%"></i>
+              <i class="" style="left:7.1%"></i>
+              <i class="" style="left:14.3%"></i>
+              <i class="" style="left:21.4%"></i>
+              <i class="yr" style="left:28.6%"></i>
+              <i class="" style="left:35.7%"></i>
+              <i class="" style="left:42.9%"></i>
+              <i class="" style="left:50.0%"></i>
+              <i class="yr" style="left:57.1%"></i>
+              <i class="" style="left:64.3%"></i>
+              <i class="" style="left:71.4%"></i>
+              <i class="" style="left:78.6%"></i>
+              <i class="yr" style="left:85.7%"></i>
+              <i class="" style="left:92.9%"></i>
+              <i class="" style="left:100.0%"></i>
             </div>
           </div>
+          <div class="gantt-tip" id="ganttTip" role="tooltip" aria-live="polite"></div>
         </div>
         <div class="gantt-legend reveal">
           <span><i style="background:linear-gradient(135deg,#1A86A0,#0A3A5A)"></i> ANRF</span>
@@ -316,7 +380,7 @@
               <span class="agency-count">1 project · ₹57.7 L</span>
             </div>
 
-            <article class="pcard pcard--anrf">
+            <article class="pcard pcard--anrf" id="proj-anrf">
               <div class="pcard__top">
                 <h3 class="pcard__title">Ocean Extreme Warming: Marine Heatwaves</h3>
                 <span class="tstatus tstatus--live"><span class="dot"></span>Ongoing</span>
@@ -357,7 +421,7 @@
               <span class="agency-count">1 project · ₹19.5 L</span>
             </div>
 
-            <article class="pcard pcard--isro">
+            <article class="pcard pcard--isro" id="proj-isro">
               <div class="pcard__top">
                 <h3 class="pcard__title">Cryosphere: Sea Ice Variability and Change</h3>
                 <span class="tstatus tstatus--live"><span class="dot"></span>Ongoing</span>
@@ -398,7 +462,7 @@
               <span class="agency-count">1 project · ₹5.0 L</span>
             </div>
 
-            <article class="pcard pcard--grp">
+            <article class="pcard pcard--grp" id="proj-grp">
               <div class="pcard__top">
                 <h3 class="pcard__title">IITD–Exeter GRP Funding on Ice-Ocean-Atmosphere Interactions</h3>
                 <span class="tstatus tstatus--live"><span class="dot"></span>Ongoing</span>
@@ -447,7 +511,7 @@
               <span class="agency-count">1 project · $8,000 (≈₹7.6 L)</span>
             </div>
 
-            <article class="pcard pcard--kaust">
+            <article class="pcard pcard--kaust" id="proj-kaust">
               <div class="pcard__top">
                 <h3 class="pcard__title">Atmospheric Dust Loading Over the Red Sea</h3>
                 <span class="tstatus tstatus--done">Completed</span>
@@ -526,28 +590,102 @@
 
   <script src="script.js"></script>
   <script>
-    /* Auto-position the "TODAY" marker on the project timeline so it always
-       reflects the real date. The axis runs Jan 2025 (0%) to Jul 2028 (100%);
-       if that axis is ever rescaled, update axisStart / axisEnd to match. */
+    /* Project timeline: places the TODAY marker, drives the hover / tap / keyboard details card.
+       The axis runs Jan 2025 (0%) to Jul 2028 (100%); if it is ever rescaled,
+       update axisStart / axisEnd to match. */
     (function () {
+      var plot   = document.querySelector('.gantt__plot');
       var marker = document.querySelector('.gantt__today');
       var label  = document.getElementById('todayLabel');
       var now = new Date();
+      var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      if (label) label.textContent = MON[now.getMonth()] + ' ' + now.getFullYear();
+      if (!plot || !marker) return;
 
-      if (label) {
-        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        label.textContent = months[now.getMonth()] + ' ' + now.getFullYear();
+      var axisStart = new Date(2025, 0, 1);   // Jan 2025 ->   0%
+      var axisEnd   = new Date(2028, 6, 1);   // Jul 2028 -> 100%
+      var todayPct  = (now - axisStart) / (axisEnd - axisStart) * 100;
+      if (todayPct < 0 || todayPct > 100) marker.style.display = 'none';
+      else marker.style.left = todayPct.toFixed(1) + '%';
+
+      var bars = [].slice.call(plot.querySelectorAll('.gantt__bar'));
+      var elapsed = new Map();
+      bars.forEach(function (bar) {
+        var left = parseFloat(bar.style.left), width = parseFloat(bar.style.width);
+        var f = Math.max(0, Math.min(1, (todayPct - left) / width));
+        elapsed.set(bar, f);
+      });
+
+      /* details card */
+      var wrap = document.getElementById('ganttWrap');
+      var tip  = document.getElementById('ganttTip');
+      var scroller = wrap && wrap.querySelector('.gantt');
+      if (!wrap || !tip) return;
+      var pinned = null, current = null, hideT = null;
+
+      function fill(bar) {
+        var d = bar.dataset, f = elapsed.get(bar) || 0, pct = Math.round(f * 100);
+        var status = d.status === 'Completed' ? 'Completed' : (f <= 0 ? 'Not started' : 'Ongoing');
+        var prog = d.status === 'Completed' ? '100% of the project period completed'
+                 : (f <= 0 ? 'Starts ' + d.start : pct + '% of the project period elapsed');
+        tip.innerHTML =
+          '<div class="gantt-tip__bar" style="background:' + d.color + '"></div>' +
+          '<p class="gantt-tip__agency"></p>' +
+          '<dl><dt>Start</dt><dd></dd><dt>End</dt><dd></dd><dt>Funding</dt><dd></dd><dt>Status</dt><dd></dd><dt>Role</dt><dd></dd></dl>' +
+          '<div class="gantt-tip__meter"><span style="width:' + (d.status === 'Completed' ? 100 : pct) + '%;background:' + d.color + '"></span></div>' +
+          '<span class="gantt-tip__pct"></span>';
+        tip.querySelector('.gantt-tip__agency').textContent = d.agency;
+        var dd = tip.querySelectorAll('dd');
+        dd[0].textContent = d.start; dd[1].textContent = d.end; dd[2].textContent = d.fund; dd[3].textContent = status; dd[4].textContent = d.role;
+        tip.querySelector('.gantt-tip__pct').textContent = prog;
+      }
+      function place(bar) {
+        var w = wrap.getBoundingClientRect(), b = bar.getBoundingClientRect();
+        var tw = tip.offsetWidth, th = tip.offsetHeight;
+        var x = b.left - w.left + b.width / 2 - tw / 2;
+        x = Math.max(8, Math.min(x, w.width - tw - 8));
+        var below = b.bottom - w.top + 10, above = b.top - w.top - th - 10;
+        var y = (below + th <= w.height + 140 || above < 0) ? below : above;
+        tip.style.left = x + 'px'; tip.style.top = y + 'px';
+      }
+      function show(bar) {
+        clearTimeout(hideT);
+        if (current !== bar) {
+          if (current) current.classList.remove('is-open');
+          current = bar; fill(bar);
+          bar.setAttribute('aria-describedby', 'ganttTip');
+        }
+        bar.classList.add('is-open');
+        tip.classList.add('is-on'); place(bar);
+      }
+      function hide(force) {
+        if (pinned && !force) return;
+        clearTimeout(hideT);
+        hideT = setTimeout(function () {
+          tip.classList.remove('is-on');
+          if (current) { current.classList.remove('is-open'); current.removeAttribute('aria-describedby'); }
+          current = null; pinned = null;
+        }, force ? 0 : 120);
       }
 
-      if (!marker) return;
-      var axisStart = new Date(2025, 0, 1);   // Jan 2025  ->   0%
-      var axisEnd   = new Date(2028, 6, 1);   // Jul 2028  -> 100%
-      var pct = (now - axisStart) / (axisEnd - axisStart) * 100;
-      if (pct < 0 || pct > 100) {             // outside the timeline -> hide it
-        marker.style.display = 'none';
-      } else {
-        marker.style.left = pct.toFixed(1) + '%';
-      }
+      bars.forEach(function (bar) {
+        bar.addEventListener('mouseenter', function () { if (!pinned) show(bar); });
+        bar.addEventListener('mouseleave', function () { hide(false); });
+        bar.addEventListener('focus', function () { if (!pinned) show(bar); });
+        bar.addEventListener('blur', function () { if (!pinned) hide(false); });
+        bar.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (pinned === bar) { hide(true); return; }   // second tap closes
+          pinned = bar; show(bar);
+        });
+      });
+      tip.addEventListener('mouseenter', function () { clearTimeout(hideT); });
+      tip.addEventListener('mouseleave', function () { hide(false); });
+      tip.addEventListener('click', function (e) { e.stopPropagation(); });
+      document.addEventListener('click', function () { if (pinned) hide(true); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && current) { var b = current; hide(true); b.focus(); } });
+      if (scroller) scroller.addEventListener('scroll', function () { if (current) place(current); }, { passive: true });
+      window.addEventListener('resize', function () { if (current) place(current); });
     })();
   </script>
   <script>
