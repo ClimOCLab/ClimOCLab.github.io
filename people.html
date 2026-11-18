@@ -51,7 +51,7 @@
       text-decoration:none; transition:border-color .2s ease, color .2s ease, box-shadow .2s ease; }
     .subnav__link:hover{ border-color:var(--c-current); color:var(--c-current); box-shadow:0 8px 18px -12px rgba(26,134,160,.35); }
     .subnav__link.is-active{ background:var(--c-ocean); border-color:var(--c-ocean); color:#fff; }
-    #phd, #mtech, #visiting, #staff{ scroll-margin-top:calc(var(--nav-h) + 72px); }
+    #phd, #mtech, #iitd-mtech, #visiting, #staff{ scroll-margin-top:calc(var(--nav-h) + 72px); }
     #people{ padding-top:clamp(1.75rem, 3.5vw, 2.75rem); }
 
     /* status tabs (same as Teaching / Research & Projects) */
@@ -107,7 +107,7 @@
         <!--span class="subnav__label">Jump to</span-->
         <a class="subnav__link" href="#phd">PhD</a>
         <a class="subnav__link" href="#mtech">CAS M.Tech.</a>
-        <a class="subnav__link" href="#mtech">IITD M.Tech.</a>
+        <a class="subnav__link" href="#iitd-mtech">IITD M.Tech.</a>
         <a class="subnav__link" href="#visiting">Visiting</a>
         <a class="subnav__link" href="#staff">Project Staff</a>
       </div>
@@ -210,6 +210,19 @@
               <p class="member__name"><a href="https://www.linkedin.com/in/shubhodeep-das-50a0a420b/" target="_blank" rel="noopener">Shubhodeep Das</a></p>
               <span class="tstatus tstatus--done">Completed</span>
               <span class="member__period">June 2024 – April 2025</span>
+            </article>
+          </div>
+        </div>
+
+        <!-- ====== IITD M.Tech. students ====== -->
+        <div class="people-group reveal" id="iitd-mtech" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
+          <h4 class="people-group__title">IITD M.Tech. Students</h4>
+          <div class="member-grid">
+            <article class="member">
+              <div class="member__photo"><img src="images/Rohit-Jadekar.jpg" alt="Rohit Jadekar"></div>
+              <p class="member__name">Rohit Jadekar</p>
+              <span class="tstatus tstatus--live"><span class="dot"></span>Ongoing</span>
+              <span class="member__period">June 2026 – April 2027</span>
             </article>
           </div>
         </div>
@@ -318,7 +331,7 @@
     /* Highlight whichever sub-nav link matches the student group currently in view */
     (function () {
       var links = [].slice.call(document.querySelectorAll('.subnav__link'));
-      var sections = ['phd', 'mtech', 'visiting', 'staff'].map(function (id) { return document.getElementById(id); });
+      var sections = ['phd', 'mtech', 'iitd-mtech', 'visiting', 'staff'].map(function (id) { return document.getElementById(id); });
       if (!links.length || !('IntersectionObserver' in window)) return;
 
       var linkFor = {};
